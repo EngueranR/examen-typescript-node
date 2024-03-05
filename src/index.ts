@@ -12,9 +12,16 @@ interface Statistics {
 }
 
 function getStatistics(): Statistics {
-  const persons: Person[] = JSON.parse(
-    readFileSync("../persons.json").toString()
-  );
+  let persons: Person[];
+  try {
+    persons = JSON.parse(readFileSync("../persons.json").toString());
+  } catch (error) {
+    console.error(
+      "Erreur lors de la lecture ou de l'analyse de persons.json:",
+      error
+    );
+    return { ageMoyen: 0, tailleMoyenne: 0 };
+  }
 
   let totalAge: number = 0;
   let totalHeight: number = 0;
