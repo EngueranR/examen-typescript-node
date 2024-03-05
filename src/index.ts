@@ -9,7 +9,8 @@ function getStatistics(): number {
   const persons: Person[] = JSON.parse(
     readFileSync("./persons.json").toString()
   );
-  return -1;
+  const ages: number[] = persons.map((person) => person.age);
+  return Math.max(...ages);
 }
 
 function displayResult() {
