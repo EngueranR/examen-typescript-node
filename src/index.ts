@@ -3,6 +3,7 @@ import { readFileSync } from "fs";
 interface Person {
   age: number;
   height: number;
+  taille?: number;
 }
 
 interface Statistics {
@@ -12,7 +13,7 @@ interface Statistics {
 
 function getStatistics(): Statistics {
   const persons: Person[] = JSON.parse(
-    readFileSync("./persons.json").toString()
+    readFileSync("../persons.json").toString()
   );
 
   let totalAge: number = 0;
@@ -20,6 +21,9 @@ function getStatistics(): Statistics {
 
   persons.forEach((person) => {
     totalAge += person.age;
+    if (person.taille) {
+      person.height = person.taille;
+    }
     totalHeight += person.height;
   });
 
